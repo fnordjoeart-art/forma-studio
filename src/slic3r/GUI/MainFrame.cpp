@@ -68,6 +68,7 @@
 
 #include "DeviceCore/DevManager.h"
 #include "slic3r/GUI/DeviceWeb/DeviceWebPage.hpp"
+#include "slic3r/GUI/FormaWeb/FormaWebHost.hpp"
 
 #ifdef _WIN32
 #include <dbt.h>
@@ -1436,10 +1437,11 @@ void MainFrame::init_tabpanel()
         }
 #endif
 #ifndef __WXGTK__
-        // macOS: avoid moving first responder into WKWebView on Filament Manager (STUDIO-18111).
+        // macOS: avoid moving first responder into WKWebView-backed tabs (STUDIO-18111).
         if (panel
 #if defined(__WXOSX__)
             && panel != m_web_device
+            && panel != m_forma_web_host
 #endif
         )
             panel->SetFocus();
@@ -1515,6 +1517,9 @@ void MainFrame::init_tabpanel()
         m_web_device = new DeviceWebPage(m_tabpanel);
         m_tabpanel->AddPage(m_web_device, _L("Filament Manager"), std::string("tab_filament_active"), std::string("tab_filament_active"), false);
     }
+
+    m_forma_web_host = new FormaWebHost(m_tabpanel);
+    m_tabpanel->AddPage(m_forma_web_host, "FORMA Mode", std::string("tab_home_active"), std::string("tab_home_active"), false);
 
     if (m_plater) {
         // load initial config

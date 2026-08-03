@@ -52,6 +52,7 @@ class MainFrame;
 class ParamsDialog;
 class FilamentGroupPopup;
 class DeviceWebPage;
+class FormaWebHost;
 
 enum QuickSlice
 {
@@ -386,6 +387,7 @@ public:
 
     CalibrationPanel*     m_calibration{ nullptr };
     DeviceWebPage*        m_web_device{ nullptr };
+    FormaWebHost*         m_forma_web_host{ nullptr };
     WebViewPanel*         m_webview { nullptr };
     PrinterWebView*       m_printer_view{nullptr};
     wxLogWindow*          m_log_window { nullptr };
