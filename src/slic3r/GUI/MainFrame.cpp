@@ -1164,6 +1164,9 @@ void MainFrame::update_title()
     // on macOS/Linux (both set by Plater::priv::set_project_name).
     const wxString name  = m_plater->get_project_name();
     const wxString title = (m_plater->is_project_dirty() && !name.IsEmpty()) ? ("* " + name) : name;
+    const wxString branded_title = title.IsEmpty()
+        ? wxString(SLIC3R_APP_NAME)
+        : title + " - " + wxString(SLIC3R_APP_NAME);
     if (title == m_title_cache)
         return;
     m_title_cache = title;
@@ -1171,14 +1174,14 @@ void MainFrame::update_title()
     if (m_topbar)
         m_topbar->SetTitle(title);
     // Also reflect the "*" in the window/taskbar title, which set_project_name builds
-    // as "<name> - BambuStudio".
-    SetTitle(title + " - BambuStudio");
-#else
-    SetTitle(title);
-#ifdef __APPLE__
+    // as "<name> - <app name>".
+    SetTitle(branded_title);
+#elif defined(__APPLE__)
+    SetTitle(branded_title);
     if (!title.IsEmpty())
         update_title_colour_after_set_title();
-#endif
+#else
+    SetTitle(title);
 #endif
 }
 
