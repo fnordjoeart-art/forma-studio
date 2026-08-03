@@ -19,7 +19,7 @@ FormaWebHost::FormaWebHost(wxWindow* parent)
     sizer->Add(m_web_view, 1, wxEXPAND);
     SetSizer(sizer);
 
-    const wxString url = wxString::Format("file://%s/web/forma/index.html", from_u8(resources_dir()));
+    const wxString url = wxString::Format("file://%s/web/forma/dist/index.html", from_u8(resources_dir()));
     m_web_view->load_url(url);
 }
 
