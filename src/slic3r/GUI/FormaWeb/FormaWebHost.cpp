@@ -1,5 +1,7 @@
 #include "FormaWebHost.hpp"
 
+#include "FormaWebBridge.hpp"
+
 #include "slic3r/GUI/GUI.hpp"
 #include "slic3r/GUI/PrinterWebView.hpp"
 #include "libslic3r/Utils.hpp"
@@ -20,8 +22,11 @@ FormaWebHost::FormaWebHost(wxWindow* parent)
     SetSizer(sizer);
 
     const wxString url = wxString::Format("file://%s/web/forma/dist/index.html", from_u8(resources_dir()));
+    m_web_bridge = std::make_unique<FormaWebBridge>(m_web_view->GetWebView(), url);
     m_web_view->load_url(url);
 }
+
+FormaWebHost::~FormaWebHost() = default;
 
 } // namespace GUI
 } // namespace Slic3r

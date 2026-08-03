@@ -308,6 +308,8 @@ set(SLIC3R_GUI_SOURCES
     GUI/WebViewDialog.hpp
     GUI/PrinterWebView.cpp
     GUI/PrinterWebView.hpp
+    GUI/FormaWeb/FormaWebBridge.cpp
+    GUI/FormaWeb/FormaWebBridge.hpp
     GUI/FormaWeb/FormaWebHost.cpp
     GUI/FormaWeb/FormaWebHost.hpp
     GUI/WebDownPluginDlg.hpp
